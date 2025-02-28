@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './TodoItem.module.css';
 import PropTypes from 'prop-types';
 
-function TodoItem({ title, completed }) {
+export function TodoItem({ title, completed }) {
 	return (
 		<li className={styles.todoItem}>
 			<span>Задача:</span>
@@ -10,8 +10,6 @@ function TodoItem({ title, completed }) {
 		</li>
 	);
 }
-
-export default TodoItem;
 
 TodoItem.propTypes = {
 	title: PropTypes.string.isRequired,
