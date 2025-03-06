@@ -8,7 +8,7 @@ export function TodoList({ todos, updateTodo, deleteTodo }) {
 		<ul className={styles.todoList}>
 			{todos.map((todo) => (
 				<TodoItem
-					key={Number(todo.id)}
+					key={todo.id}
 					todo={todo}
 					updateTodo={updateTodo}
 					deleteTodo={deleteTodo}
