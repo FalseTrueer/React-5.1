@@ -43,10 +43,34 @@
 	background-color: rgb(172, 172, 172);
 	border-radius: 5px;
 	padding: 10px;
+	border: 2px solid black;
 }
 
-.btn{
-	border: 1px solid black;
+.controls {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.search {
+	background-color: rgb(172, 172, 172);
 	border-radius: 5px;
+	padding: 10px;
+	border: 2px solid black;
+	width: 100%;
+	font-size: 14px;
+}
+
+.btn {
 	padding: 5px;
+	border: 2px solid black ;
+	cursor: pointer;
+	font-size: 14px;
+	font-weight: bold;
+	transition: 0.3s;
+}
+
+.btn:hover {
+	background-color: rgb(200, 200, 200);
 }

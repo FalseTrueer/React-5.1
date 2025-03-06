@@ -5,6 +5,8 @@ export function useTodos() {
     const [isLoading, setIsLoading] = useState(false);
     const [newTodo, setNewTodo] = useState('');
     const [isCreating, setIsCreating] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [isSorted, setIsSorted] = useState(false);
 
     useEffect(() => {
         setIsLoading(true);
@@ -64,5 +66,26 @@ export function useTodos() {
             .catch((error) => console.error('Ошибка при удалении:', error));
     };
 
-    return { todos, isLoading, newTodo, setNewTodo, isCreating, addTodo, updateTodo, deleteTodo };
+    const filteredTodos = todos.filter((todo) =>
+        todo.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+
+    const sortedTodos = isSorted
+        ? [...filteredTodos].sort((a, b) => a.title.localeCompare(b.title))
+        : filteredTodos;
+
+    return {
+        todos: sortedTodos,
+        isLoading,
+        newTodo,
+        setNewTodo,
+        isCreating,
+        addTodo,
+        updateTodo,
+        deleteTodo,
+        searchQuery,
+        setSearchQuery,
+        isSorted,
+        setIsSorted,
+    };
 }

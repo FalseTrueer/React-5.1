@@ -1,1 +1,1 @@
-export * from './CRUD'
+export * from './CRUD+Sort+Filter'

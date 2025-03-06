@@ -6,14 +6,18 @@ import { TodoItem } from '../';
 export function TodoList({ todos, updateTodo, deleteTodo }) {
 	return (
 		<ul className={styles.todoList}>
-			{todos.map((todo) => (
-				<TodoItem
-					key={todo.id}
-					todo={todo}
-					updateTodo={updateTodo}
-					deleteTodo={deleteTodo}
-				/>
-			))}
+			{todos.length === 0 ? (
+				<p className={styles.empty}>Задач не найдено</p>
+			) : (
+				todos.map((todo) => (
+					<TodoItem
+						key={todo.id}
+						todo={todo}
+						updateTodo={updateTodo}
+						deleteTodo={deleteTodo}
+					/>
+				))
+			)}
 		</ul>
 	);
 }

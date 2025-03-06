@@ -13,6 +13,10 @@ function App() {
 		addTodo,
 		updateTodo,
 		deleteTodo,
+		searchQuery,
+		setSearchQuery,
+		isSorted,
+		setIsSorted,
 	} = useTodos();
 
 	return (
@@ -21,11 +25,28 @@ function App() {
 				<div className={styles.loader}></div>
 			) : (
 				<>
+					<div className={styles.controls}>
+						<input
+							type="text"
+							className={styles.search}
+							placeholder="Поиск по задачам..."
+							value={searchQuery}
+							onChange={(e) => setSearchQuery(e.target.value)}
+						/>
+						<button
+							className={styles.btn}
+							onClick={() => setIsSorted(!isSorted)}
+						>
+							{isSorted ? 'Отключить сортировку' : 'Сортировать A-Z'}
+						</button>
+					</div>
+
 					<TodoList
 						todos={todos}
 						updateTodo={updateTodo}
 						deleteTodo={deleteTodo}
 					/>
+
 					<form className={styles.form} onSubmit={addTodo}>
 						<input
 							type="text"
