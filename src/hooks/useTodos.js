@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { readTodos } from './read-todos';
-import { addNewTodo } from './create-todo';
-import { updateCurTodo } from './update-todo';
-import { deleteCurTodo } from './delete-todo';
-import { filterTodos } from './filter-todos';
-import { sortTodos } from './sort-todos';
+import {
+	readTodos,
+	addNewTodo,
+	updateCurTodo,
+	deleteCurTodo,
+	filterTodos,
+	sortTodos,
+} from '../utils';
 
 export function useTodos() {
 	const [todos, setTodos] = useState([]);
