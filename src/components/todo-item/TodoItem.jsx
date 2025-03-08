@@ -4,19 +4,21 @@ import PropTypes from 'prop-types';
 
 export function TodoItem({ todo, updateTodo, deleteTodo }) {
 	const [isEditing, setIsEditing] = useState(false);
-	const [editedTitle, setEditedTitle] = useState(todo.title);
-	const [isCompleted, setIsCompleted] = useState(todo.completed);
+	const [editedTodo, setEditedTodo] = useState({
+		title: todo.title,
+		completed: todo.completed,
+	});
 
 	function handleEditClick() {
 		setIsEditing(true);
 	}
 
 	function handleChange(event) {
-		setEditedTitle(event.target.value);
+		setEditedTodo({ ...editedTodo, title: event.target.value });
 	}
 
 	function handleBlur() {
-		updateTodo(todo.id, { title: editedTitle });
+		updateTodo(todo.id, editedTodo);
 		setIsEditing(false);
 	}
 
@@ -27,9 +29,9 @@ export function TodoItem({ todo, updateTodo, deleteTodo }) {
 	}
 
 	function toggleComplete() {
-		const newCompleted = !isCompleted;
-		setIsCompleted(newCompleted);
-		updateTodo(todo.id, { completed: newCompleted });
+		const updatedTodo = { ...editedTodo, completed: !editedTodo.completed };
+		setEditedTodo(updatedTodo);
+		updateTodo(todo.id, updatedTodo);
 	}
 
 	function handleDelete() {
@@ -42,7 +44,7 @@ export function TodoItem({ todo, updateTodo, deleteTodo }) {
 			{isEditing ? (
 				<input
 					type="text"
-					value={editedTitle}
+					value={editedTodo.title}
 					onChange={handleChange}
 					onBlur={handleBlur}
 					onKeyDown={handleKeyDown}
@@ -50,10 +52,10 @@ export function TodoItem({ todo, updateTodo, deleteTodo }) {
 					className={styles.input}
 				/>
 			) : (
-				<span>{todo.title}</span>
+				<span>{editedTodo.title}</span>
 			)}
 			<button className={styles.svg} onClick={toggleComplete}>
-				{isCompleted ? '✔️' : '❌'}
+				{editedTodo.completed ? '✔️' : '❌'}
 			</button>
 			<button className={styles.svg} onClick={handleEditClick}>
 				🖉

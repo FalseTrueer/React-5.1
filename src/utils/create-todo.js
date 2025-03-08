@@ -1,19 +1,18 @@
-export const addNewTodo = (newTodo, setIsCreating, setTodos, setNewTodo) => {
+import { ref, push } from 'firebase/database';
+import { db } from '../firebase';
+
+export const addNewTodo = (newTodo, setIsCreating, setNewTodo) => {
 	if (!newTodo.trim()) return;
 
 	setIsCreating(true);
 	const newTask = { title: newTodo, completed: false };
 
-	fetch('http://localhost:3000/todos', {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify(newTask),
-	})
-		.then((response) => response.json())
-		.then((data) => {
-			setTodos((prev) => [...prev, data]);
-			setNewTodo('');
-		})
+	const productsDbRef = ref(db, 'todos');
+
+	push(productsDbRef, newTask)
 		.catch((error) => console.error('Ошибка:', error))
-		.finally(() => setIsCreating(false));
+		.finally(() => {
+			setNewTodo('');
+			setIsCreating(false);
+		});
 };

@@ -20,12 +20,12 @@ export function useTodos() {
 
 	const addTodo = (event) => {
 		event.preventDefault();
-		addNewTodo(newTodo, setIsCreating, setTodos, setNewTodo);
+		addNewTodo(newTodo, setIsCreating, setNewTodo);
 	};
 
-	const updateTodo = (id, updatedFields) => updateCurTodo(setTodos, id, updatedFields);
+	const updateTodo = (id, updatedFields) => updateCurTodo(id, updatedFields);
 
-	const deleteTodo = (id) => deleteCurTodo(id, setTodos);
+	const deleteTodo = (id) => deleteCurTodo(id);
 
 	const filteredTodos = filterTodos(todos, searchQuery);
 
